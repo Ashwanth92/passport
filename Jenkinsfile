@@ -15,7 +15,7 @@ pipeline{
      stage("Build & SonarQube analysis") {
             agent any
             steps {
-              withSonarQubeEnv('SonarPassport') {
+              withSonarQubeEnv('Sonarqube') {
                 sh 'java -version'
                 sh 'mvn clean package sonar:sonar'
               }
@@ -30,7 +30,7 @@ pipeline{
      stage('Deploy to artifactory'){
         steps{
         rtUpload(
-         serverId : 'ARTIFACTORY_SERVER',
+         serverId : 'jfrog-platform-1',
          spec :'''{
            "files" :[
            {
